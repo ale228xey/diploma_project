@@ -20,3 +20,16 @@ class Post(models.Model):
 
     def __str__(self):
         return f'Пост {self.author}'
+
+
+class Project(models.Model):
+    COMPLEXITY_CHOICES = [
+        ('EZ', 'easy'),
+        ('NO', 'normal'),
+        ('HA', 'hard'),
+    ]
+    developer = models.ForeignKey(Owner, on_delete=models.CASCADE)
+    project_url = models.CharField(max_length=150)
+    about_project = models.TextField(max_length=400)
+    complexity = models.CharField(max_length=2, choices=COMPLEXITY_CHOICES, blank=True)
+    img_project = models.ImageField(upload_to='img/project', default=True)

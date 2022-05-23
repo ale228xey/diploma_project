@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% for project in projects %}
+<h1>{{ project.project_url }}</h1>
+<p>{{ project.about_project }}</p>
+<p>{{ project.complexity }}</p>
+<img src="{{ project.img_project.url }}" class="img-responsive" alt="">
+{% endfor %}
+
+{% endblock %}
