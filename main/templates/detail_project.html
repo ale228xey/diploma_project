@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{project.developer}}</h1>
+<p>{{project.project_url}}</p>
+<img src="{{ project.img_project.url }}" class="img-responsive" alt="">
+<p>{{project.about_project}}</p>
+<p>{{project.complexity}}</p>
+{% endblock %}

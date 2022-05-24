@@ -2,7 +2,7 @@
 {% block content %}
 <img src="../media/img/avatar/диплом.jpg" alt="">
 {% for post in posts %}
-<h1>{{post.title}}</h1>
+<a href="{{post.get_absolute_url}}"><h1>{{post.title}}</h1></a>
 <p>{{post.content}}</p>
 <p>{{post.created}}</p>
 <p>{{post.author}}</p>

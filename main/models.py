@@ -2,6 +2,9 @@ from django.contrib.auth.models import User
 from django.db import models
 
 # Create your models here.
+from django.urls import reverse
+
+
 class Owner(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
@@ -18,6 +21,9 @@ class Post(models.Model):
     content = models.TextField(max_length=450)
     created = models.DateTimeField(auto_now_add=True)
 
+    def get_absolute_url(self):
+        return reverse('detail_post', kwargs={'pk': self.pk})
+
     def __str__(self):
         return f'Пост {self.author}'
 
@@ -33,3 +39,6 @@ class Project(models.Model):
     about_project = models.TextField(max_length=400)
     complexity = models.CharField(max_length=2, choices=COMPLEXITY_CHOICES, blank=True)
     img_project = models.ImageField(upload_to='img/project', default=True)
+
+    def get_absolute_url(self):
+        return reverse('detail_project', kwargs={'pk': self.pk})
