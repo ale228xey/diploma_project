@@ -2,20 +2,26 @@
 {% block content %}
 <div class="header">
     <h2>Blog Name</h2>
-    <img src="../media/img/avatar/диплом.jpg" alt="">
 </div>
 
 <div class="row">
     <div class="leftcolumn">
         {% for post in posts %}
         <div class="card">
-            <h2><a href="{{post.get_absolute_url}}">{{post.title}}</a></h2>
-            <h5>{{post.created}} by {{post.author}}</h5>
-            <div class="fakeimg" style="height:200px;">Image</div>
-            <p>{{post.content}}</p>
+            <div class="card-header">{{post.title}}</div>
+            <hr>
+            <div class="card-body">
+                <p class="card-text">
+                    {{post.content}}
+                </p>
+                <button type="button" class="button"><a href="{{post.get_absolute_url}}">Read More</a></button>
+            </div>
+            <div class="card-footer">{{post.created}} by {{post.author}}</div>
         </div>
         {% endfor %}
     </div>
+
+
     <div class="rightcolumn">
         <div class="card">
             <h2><a href="{% url 'about' %}">About Me</a></h2>
@@ -25,45 +31,33 @@
         <div class="card">
             <h3><a href="{% url 'projects' %}">My Projects</a></h3>
             <div class="fakeimg">Image</div>
-            <br>
-            <div class="fakeimg">Image</div>
-            <br>
-            <div class="fakeimg">Image</div>
-        </div>
-        <div class="card">
-            <h3>Follow Me</h3>
-            <p>Some text..</p>
-            <ul class="social-icon">
-                <li><a href="https://www.facebook.com/vlad.narchuk.7" target="_blank" class="facebook"><i
-                        class="fa fa-facebook"></i></a></li>
-                <li><a href="#" target="_blank" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
-                <li><a href="https://github.com/Poklok" target="_blank" class="github"><i class="fa fa-github"></i></a>
-                </li>
-            </ul>
         </div>
     </div>
 </div>
-{% if is_paginated %}
-  <ul class="pagination">
+<div class="pagination">
     {% if page_obj.has_previous %}
-      <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
-    {% else %}
-      <li class="disabled"><span>&laquo;</span></li>
+    <a class="pagination-action" href="?page=1">
+        <i class='bx bx-chevrons-left' aria-hidden="true"></i> </a>
+    <a class="pagination-action" href="?page={{ page_obj.previous_page_number }}">
+        <i class='bx bx-chevron-left' aria-hidden="true"></i>
+    </a>
     {% endif %}
-    {% for i in paginator.page_range %}
-      {% if page_obj.number == i %}
-        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
-      {% else %}
-        <li><a href="?page={{ i }}">{{ i }}</a></li>
-      {% endif %}
+    {% for num in page_obj.paginator.page_range %}
+    {% if files.number == num %}
+    <span class="pagination-number pagination-current">{{ num }}</span>
+    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+    <a class="pagination-number" href="?page={{ num }}">{{ num }}</a>
+    {% endif %}
     {% endfor %}
     {% if page_obj.has_next %}
-      <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
-    {% else %}
-      <li class="disabled"><span>&raquo;</span></li>
+    <a class="pagination-action" href="?page={{ page_obj.next_page_number }}">
+        <i class='bx bx-chevron-right' aria-hidden="true"></i>
+    </a>
+    <a class="pagination-action" href="?page={{ page_obj.paginator.num_pages }}">
+        <i class='bx bx-chevrons-right' aria-hidden="true"></i>
+    </a>
     {% endif %}
-  </ul>
-{% endif %}
+</div>
 <div class="footer">
     <h2>Footer</h2>
 </div>

@@ -1,68 +1,153 @@
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 body {
-  font-family: Arial;
-  padding: 20px;
-  background: #f1f1f1;
+    font-family: Arial;
+    padding: 20px;
+    background: #f1f1f1;
 }
 
 /* Header/Blog Title */
 .header {
-  padding: 30px;
-  font-size: 40px;
-  text-align: center;
-  background: white;
+    padding: 30px;
+    font-size: 40px;
+    text-align: center;
+    background: white;
+    border-radius: 10px;
 }
 
 /* Create two unequal columns that floats next to each other */
 /* Left column */
 .leftcolumn {
-  float: left;
-  width: 75%;
+    float: left;
+    width: 75%;
 }
 
 /* Right column */
 .rightcolumn {
-  float: left;
-  width: 25%;
-  padding-left: 20px;
+    float: left;
+    width: 25%;
+    padding-left: 20px;
 }
 
 /* Fake image */
 .fakeimg {
-  background-color: #aaa;
-  width: 100%;
-  padding: 20px;
+    background-color: #aaa;
+    width: 100%;
+    padding: 20px;
 }
 
 /* Add a card effect for articles */
 .card {
-  background-color: white;
-  padding: 20px;
-  margin-top: 20px;
+    background-color: white;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 10px;
+}
+
+.leftcolumn > .card {
+    height: 30vh;
 }
 
 /* Clear floats after the columns */
 .row:after {
-  content: "";
-  display: table;
-  clear: both;
+    content: "";
+    display: table;
+    clear: both;
 }
 
 /* Footer */
 .footer {
-  padding: 20px;
-  text-align: center;
-  background: #ddd;
-  margin-top: 20px;
+    padding: 20px;
+    text-align: center;
+    background: #ddd;
+    margin-top: 20px;
+    border-radius: 10px;
 }
 
 /* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 800px) {
-  .leftcolumn, .rightcolumn {
-    width: 100%;
-    padding: 0;
-  }
+    .leftcolumn, .rightcolumn {
+        width: 100%;
+        padding: 0;
+    }
+}
+
+.button {
+    border-radius: 4px;
+    background-color: #3354AA;
+    border: none;
+    text-align: center;
+    font-size: 15px;
+    padding: 10px;
+    width: 125px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 0 5px 10px 0;
+}
+
+.button a {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+    text-decoration: none;
+    color: #FFFFFF;
+}
+
+.button a:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+}
+
+.button:hover a {
+    padding-right: 20px;
+}
+
+.button:hover a:after {
+    opacity: 1;
+    right: 0;
+}
+
+.pagination {
+    display: flex;
+    margin-top: 15px;
+    align-items: center;
+    justify-content: center;
+}
+
+.pagination a {
+    text-decoration: none;
+}
+
+.pagination-number {
+    padding: 12px 17px;
+    border-radius: 2px;
+    color: #fff;
+    background-color: #6D85C7;
+}
+
+.pagination-number:hover,
+.pagination-current {
+    background-color: #3354AA;
+}
+
+.pagination-action {
+    margin: 0 2px;
+    display: flex;
+    padding: 1px 2px;
+    color: #fff;
+    font-size: 1.3em;
+    align-items: center;
+}
+
+.pagination-action:hover,
+.pagination-previous,
+.pagination-next {
+    color: #3354AA;
 }
