@@ -11,6 +11,7 @@ class MainPage(ListView):
     model = Post
     template_name = 'index.html'
     context_object_name = 'posts'
+    paginate_by = 2
 
 
 class ProjectPage(ListView):

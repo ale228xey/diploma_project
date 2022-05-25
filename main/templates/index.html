@@ -1,10 +1,70 @@
 {% extends "base.html" %}
 {% block content %}
-<img src="../media/img/avatar/диплом.jpg" alt="">
-{% for post in posts %}
-<a href="{{post.get_absolute_url}}"><h1>{{post.title}}</h1></a>
-<p>{{post.content}}</p>
-<p>{{post.created}}</p>
-<p>{{post.author}}</p>
-{% endfor %}
+<div class="header">
+    <h2>Blog Name</h2>
+    <img src="../media/img/avatar/диплом.jpg" alt="">
+</div>
+
+<div class="row">
+    <div class="leftcolumn">
+        {% for post in posts %}
+        <div class="card">
+            <h2><a href="{{post.get_absolute_url}}">{{post.title}}</a></h2>
+            <h5>{{post.created}} by {{post.author}}</h5>
+            <div class="fakeimg" style="height:200px;">Image</div>
+            <p>{{post.content}}</p>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="rightcolumn">
+        <div class="card">
+            <h2><a href="{% url 'about' %}">About Me</a></h2>
+            <div class="fakeimg" style="height:100px;">Image</div>
+            <p>Some text about me in culpa qui officia deserunt mollit anim..</p>
+        </div>
+        <div class="card">
+            <h3><a href="{% url 'projects' %}">My Projects</a></h3>
+            <div class="fakeimg">Image</div>
+            <br>
+            <div class="fakeimg">Image</div>
+            <br>
+            <div class="fakeimg">Image</div>
+        </div>
+        <div class="card">
+            <h3>Follow Me</h3>
+            <p>Some text..</p>
+            <ul class="social-icon">
+                <li><a href="https://www.facebook.com/vlad.narchuk.7" target="_blank" class="facebook"><i
+                        class="fa fa-facebook"></i></a></li>
+                <li><a href="#" target="_blank" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
+                <li><a href="https://github.com/Poklok" target="_blank" class="github"><i class="fa fa-github"></i></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% if is_paginated %}
+  <ul class="pagination">
+    {% if page_obj.has_previous %}
+      <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in paginator.page_range %}
+      {% if page_obj.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if page_obj.has_next %}
+      <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}
+<div class="footer">
+    <h2>Footer</h2>
+</div>
 {% endblock %}
