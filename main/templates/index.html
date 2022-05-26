@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="header">
-    <h2>Blog Name</h2>
+    <h3>Diploma Project</h3>
 </div>
 
 <div class="row">
@@ -25,12 +25,11 @@
     <div class="rightcolumn">
         <div class="card">
             <h2><a href="{% url 'about' %}">About Me</a></h2>
-            <div class="fakeimg" style="height:100px;">Image</div>
             <p>Some text about me in culpa qui officia deserunt mollit anim..</p>
         </div>
         <div class="card">
-            <h3><a href="{% url 'projects' %}">My Projects</a></h3>
-            <div class="fakeimg">Image</div>
+            <h2><a href="{% url 'projects' %}">My Projects</a></h2>
+            <div class="fakeimg"><img src="../media/img/avatar/project_img.png" alt=""></div>
         </div>
     </div>
 </div>
@@ -59,6 +58,10 @@
     {% endif %}
 </div>
 <div class="footer">
-    <h2>Footer</h2>
+    <div class="footer-content">
+        <h3>Alex's Footer</h3>
+        <p>Alex's Footer is a footer of website where you can find info about me and about my projects</p>
+    </div>
+    <p>copyright &copy;2022</p>
 </div>
 {% endblock %}

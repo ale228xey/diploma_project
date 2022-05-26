@@ -1,9 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
 from django.views import View
 from django.views.generic import TemplateView, ListView, DetailView
 
+from main.forms import CommentFormForPost
 from main.models import Post, Project
 
 
@@ -24,10 +25,22 @@ class AboutPage(TemplateView):
     template_name = 'about.html'
 
 
-class PostDetail(DetailView):
-    model = Post
+# class PostDetail(DetailView):
+#     model = Post
+#     template_name = 'detail_post.html'
+#     context_object_name = 'post'
+
+class PostDetail(View):
     template_name = 'detail_post.html'
-    context_object_name = 'post'
+    comment_form = CommentFormForPost
+
+    def get(self, request, pk, *args, **kwargs):
+        post = get_object_or_404(Post, pk=pk)
+        context = {}
+        context['post'] = post
+        context['comments'] = post.comments.filter(status_comment=True)
+        context['form'] = self.comment_form
+        return render(request, template_name=self.template_name, context=context)
 
 
 class ProjectDetail(DetailView):

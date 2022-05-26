@@ -42,3 +42,19 @@ class Project(models.Model):
 
     def get_absolute_url(self):
         return reverse('detail_project', kwargs={'pk': self.pk})
+
+
+class CommentForPost(models.Model):
+    post = models.ForeignKey(Post, related_name='comments', on_delete=models.CASCADE)
+    author_comment = models.CharField(max_length=50)
+    content_comment = models.TextField(max_length=200)
+    created_comment = models.DateTimeField(auto_now_add=True)
+    status_comment = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f'Комментарий от {self.author_comment} для: - {self.post}'
+
+    class Meta:
+        verbose_name = 'Комментарий'
+        verbose_name_plural = 'Комментарии'
+        ordering = ('-created_comment',)
